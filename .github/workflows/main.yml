@@ -1,0 +1,21 @@
+name: Build spicetify
+
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup golang environment
+      uses: actions/setup-go@v2
+    
+    - name: Build spicetify
+      run: go build -o spicetify.exe
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: spicetify.exe
+        path: ./
+    
